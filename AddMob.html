@@ -1,0 +1,78 @@
+//AddMob.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mobile Number Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Store Mobile Number</h2>
+    <form id="mobileForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" required pattern="[0-9]{10}">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="message"></div>
+
+    <script>
+        document.getElementById('mobileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const mobile = document.getElementById('mobile').value;
+            const messageDiv = document.getElementById('message');
+
+            // Replace with your Google Apps Script URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycby0yNYr6_flOZs_2wIdTfIYCcHmu91JiajtU4ksl5yANzAqqdEc7xzkBxG5wVd8bl1FMQ/exec';
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({name: name, mobile: mobile})
+            })
+            .then(() => {
+                messageDiv.innerHTML = 'Data stored successfully!';
+                messageDiv.style.color = 'green';
+                document.getElementById('mobileForm').reset();
+            })
+            .catch(error => {
+                messageDiv.innerHTML = 'Error storing data!';
+                messageDiv.style.color = 'red';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
