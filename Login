@@ -85,7 +85,7 @@
     const address = document.getElementById("address").value;
     const reference = document.getElementById("reference").value;
 
-    fetch("YOUR_GOOGLE_APPS_SCRIPT_URL", {
+    fetch("https://script.google.com/macros/s/AKfycbyAzwChDHVFqGFpUDQVe4F9G7jRkR24ArfDZb5kH5P7_oaiz4od_q4Btsc0Tfx5NcHs/exec", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, mobile, password, address, reference, timestamp: new Date().toISOString() })
